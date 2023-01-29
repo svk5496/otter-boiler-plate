@@ -22,6 +22,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
   width: ${(props) => props.width};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
+  opacity: ${(props) => (props.disabled ? "0.4" : "1")};
   font-size: ${(props) => props.fontSize};
   border-radius: 5px;
   color: ${(props) => props.fontColor};
@@ -43,7 +44,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
     color: ${(props) => props.hoverFontColor};
   }
   svg {
-    margin: 0px 12px;
+    margin-right: 12px;
   }
 `;
 
@@ -55,11 +56,14 @@ interface ButtonProps {
     | "primary"
     | "secondary"
     | "tertiary"
+    | "confirm"
     | "danger"
-    | "ghost";
+    | "ghost"
+    | "ghostColor";
   fontWeight?: string;
   label: string;
   margin?: string;
+  width?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   active?: boolean;
   disabled?: boolean;
@@ -72,16 +76,16 @@ export const ButtonText = ({
   variant = "default",
   fullWidth = false,
   fontWeight,
-  label,
   margin = "0px 0px",
+  label,
   active = false,
   disabled = false,
   onClick,
+  width = undefined,
   ...props
 }: ButtonProps) => {
   let padding = "0px";
   let fontSize = "14px";
-  let width = undefined;
   let backgroundColor = "white";
   let fontColor = "";
   let borderWidth = "1px";
@@ -152,19 +156,29 @@ export const ButtonText = ({
       borderStyle = "soild";
       borderWidth = "1px";
       borderColor = lightTheme.white;
-      hoverBackgroundColor = lightTheme.bgColor;
-      hoverBorderColor = lightTheme.bgColor;
+      hoverBackgroundColor = lightTheme.bgColorLight;
+      hoverBorderColor = lightTheme.bgColorLight;
       hoverFontColor = lightTheme.fontColor;
       if (active) {
-        backgroundColor = lightTheme.bgColor;
+        backgroundColor = lightTheme.bgColorLight;
         fontColor = lightTheme.primary;
         borderStyle = "soild";
         borderWidth = "1px";
         borderColor = lightTheme.white;
-        hoverBackgroundColor = lightTheme.bgColor;
-        hoverBorderColor = lightTheme.bgColor;
+        hoverBackgroundColor = lightTheme.bgColorLight;
+        hoverBorderColor = lightTheme.bgColorLight;
         hoverFontColor = lightTheme.primary;
       }
+      break;
+    case "confirm":
+      backgroundColor = lightTheme.blue;
+      fontColor = lightTheme.white;
+      borderStyle = "soild";
+      borderWidth = "1px";
+      borderColor = lightTheme.blue;
+      hoverBackgroundColor = lightTheme.blueDark;
+      hoverBorderColor = lightTheme.blueDark;
+      hoverFontColor = lightTheme.white;
       break;
     case "danger":
       backgroundColor = lightTheme.white;
@@ -178,6 +192,16 @@ export const ButtonText = ({
       break;
     case "ghost":
       backgroundColor = lightTheme.white;
+      fontColor = lightTheme.fontColor;
+      borderStyle = "soild";
+      borderWidth = "1px";
+      borderColor = lightTheme.white;
+      hoverBackgroundColor = lightTheme.bgColor;
+      hoverBorderColor = lightTheme.bgColor;
+      hoverFontColor = lightTheme.fontColor;
+      break;
+    case "ghostColor":
+      backgroundColor = lightTheme.white;
       fontColor = lightTheme.primary;
       borderStyle = "soild";
       borderWidth = "1px";
@@ -190,6 +214,7 @@ export const ButtonText = ({
 
   return (
     <StyledButton
+      data-testId="test-button-text"
       backgroundColor={backgroundColor}
       fontSize={fontSize}
       width={width}
@@ -203,6 +228,7 @@ export const ButtonText = ({
       hoverBorderColor={hoverBorderColor}
       hoverFontColor={hoverFontColor}
       disabled={disabled}
+      onClick={onClick}
       {...props}
     >
       {label}

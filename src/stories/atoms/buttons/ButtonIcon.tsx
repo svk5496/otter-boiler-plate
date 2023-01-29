@@ -100,13 +100,13 @@ export const ButtonIcon = ({
       break;
     case "primary":
       backgroundColor = lightTheme.white;
-      iconColor = lightTheme.primary;
+      iconColor = lightTheme.blue;
       borderStyle = "soild";
       borderWidth = "1px";
-      borderColor = lightTheme.primary;
-      hoverBackgroundColor = lightTheme.white;
+      borderColor = lightTheme.blue;
+      hoverBackgroundColor = lightTheme.blueLight;
       hoverBorderColor = "inherit";
-      hoverIconColor = lightTheme.primaryDark;
+      hoverIconColor = lightTheme.blue;
       break;
     case "danger":
       backgroundColor = lightTheme.white;

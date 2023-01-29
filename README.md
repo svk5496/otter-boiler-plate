@@ -41,7 +41,25 @@ npm i -D recoil
 5. install jest
 
 ```
-npm install -D jest @types/jest
+npm install -D jest @types/jest ts-jest
 script 파일 test:jest로 변경
+npm install --save-dev @babel/preset-typescript
 ```
 
+6. install storybook
+
+```
+npx storybook init --> initialize storybook
+
+//테스트 러너에 관한 라이브러리
+npm install @storybook/test-runner --save-dev
+npm install @storybook/addon-a11y --save-dev
+npm install @storybook/jest
+
+//아이콘 관련 라이브러리
+@fortawesome/fontawesome-svg-core
+@fortawesome/free-brands-svg-icons
+@fortawesome/free-regular-svg-icons
+@fortawesome/free-solid-svg-icons
+@fortawesome/react-fontawesome
+```
